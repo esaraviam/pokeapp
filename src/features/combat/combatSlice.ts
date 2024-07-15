@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CombatState {
-  combatList: any[];
+  combatList: string[];
 }
 
 const initialState: CombatState = {
@@ -12,9 +12,7 @@ const combatSlice = createSlice({
   name: 'combat',
   initialState,
   reducers: {
-    addToCombatList: (state, action: PayloadAction<any>) => {
-
-      console.log(state.combatList)
+    addToCombatList: (state, action: PayloadAction<string>) => {
       if (state.combatList.length < 6 && !state.combatList.find(pokemon => pokemon === action.payload)) {
         state.combatList.push(action.payload);
       }

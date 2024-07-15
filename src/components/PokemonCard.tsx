@@ -27,13 +27,13 @@ interface PokemonCardProps {
   pokemon_name: string;
   addHandler?: boolean;
   deleteHandler?: boolean;
-  isFullDescription: boolean
+  isFullDescription: boolean;
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
                                                    pokemon_name,
-                                                   addHandler = false,
-                                                   deleteHandler = false,
+                                                   addHandler,
+                                                   deleteHandler,
                                                    isFullDescription = false
                                                  }) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
@@ -72,7 +72,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-orange-200 rounded-xl shadow-md overflow-hidden mb-5">
+    <div className="w-full max-w-md mx-auto bg-orange-200 rounded-xl shadow-md overflow-hidden mb-4">
       <div className="p-4 bg-orange-500 text-white text-center">
         <h1 className="text-xl font-bold">{pokemon.name}</h1>
         <p className="text-sm">#{pokemon.id.toString().padStart(3, '0')}</p>

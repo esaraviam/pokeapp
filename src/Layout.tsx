@@ -1,6 +1,7 @@
 import React from "react";
 import PokemonList from "./components/PokemonList.tsx";
 import CombatList from "./components/CombatList.tsx";
+import SearchBar from "./components/SearchBar.tsx";
 
 export default function Layout() {
   return (
@@ -8,9 +9,6 @@ export default function Layout() {
     <>
       <div className="flex">
         <div className="md:w-2/3 p-4">
-          <div className="mb-4">
-            <h1 className="text-xl font-bold">Que pokemon buscas...</h1>
-          </div>
           <PokemonList/>
         </div>
         <div className="md:w-1/3 p-4 bg-gray-100">

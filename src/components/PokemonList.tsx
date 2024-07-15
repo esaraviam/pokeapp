@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch } from '../hooks/useAppDispatch.ts';
-import {  useAppSelector } from '../hooks/useAppSelector.ts';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useAppSelector } from '../hooks/useAppSelector';
 import { getPokemons } from '../features/pokemon/pokemonSlice';
-import { addToCombatList } from '../features/combat/combatSlice';
-import PokemonCard from "./PokemonCard.tsx";
+import PokemonCard from './PokemonCard';
+import SearchBar from './SearchBar';
 
 const PokemonList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { pokemons, status } = useAppSelector(state => state.pokemon);
+  const [filteredPokemons, setFilteredPokemons] = useState(pokemons);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -15,18 +16,35 @@ const PokemonList: React.FC = () => {
     }
   }, [dispatch, status]);
 
-  return (
-    <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+  useEffect(() => {
+    setFilteredPokemons(pokemons);
+  }, [pokemons]);
 
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'succeeded' && (
-        <>
-          {pokemons.map(pokemon => (
-            <PokemonCard pokemon_name={pokemon.name} addHandler={() => console.log("aca")} />
-          ))}
-        </>
-      )}
-    </div>
+  const handleSearch = (query: string) => {
+    const lowerCaseQuery = query.toLowerCase();
+    const filtered = pokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(lowerCaseQuery)
+    );
+    setFilteredPokemons(filtered);
+  };
+
+  return (
+    <>
+      <div className="mb-4">
+        <h1 className="text-xl font-bold">Que pokemon buscas...</h1>
+        <SearchBar onSearch={handleSearch} />
+      </div>
+      <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+        {status === 'loading' && <p>Loading...</p>}
+        {status === 'succeeded' && (
+          <>
+            {filteredPokemons.map(pokemon => (
+              <PokemonCard key={pokemon.name} pokemon_name={pokemon.name} addHandler isFullDescription={false} />
+            ))}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

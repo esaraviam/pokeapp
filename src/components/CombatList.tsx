@@ -18,7 +18,7 @@ const CombatList: React.FC = () => {
             <PokemonCard
               pokemon_name={pokemon}
               isFullDescription={false}
-              deleteHandler={() => dispatch(removeFromCombatList(pokemon.name))}
+              deleteHandler
             />
           )}
         </div>
