@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch.ts";
 import {useAppSelector} from "../hooks/useAppSelector.ts";
 import {addToCombatList, removeFromCombatList} from "../features/combat/combatSlice.ts";
@@ -39,7 +39,6 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
   const dispatch = useAppDispatch();
-  const combatList = useAppSelector(state => state.combatList);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -110,7 +109,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           {addHandler && (
             <button
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
-              onClick={() => dispatch(addToCombatList(pokemon.name))}
+              onClick={() => dispatch(addToCombatList(pokemon?.name))}
             >
               Add to team
             </button>
@@ -119,7 +118,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           {deleteHandler && (
             <button
               className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-              onClick={() => dispatch(removeFromCombatList(pokemon.name))}
+              onClick={() => dispatch(removeFromCombatList(pokemon?.name))}
             >
               Remove from team
             </button>

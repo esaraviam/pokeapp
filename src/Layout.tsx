@@ -1,7 +1,6 @@
 import React from "react";
 import PokemonList from "./components/PokemonList.tsx";
 import CombatList from "./components/CombatList.tsx";
-import SearchBar from "./components/SearchBar.tsx";
 
 export default function Layout() {
   return (
