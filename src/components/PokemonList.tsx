@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { getPokemons } from '../features/pokemon/pokemonSlice';
@@ -38,9 +38,13 @@ const PokemonList: React.FC = () => {
         {status === 'loading' && <p>Loading...</p>}
         {status === 'succeeded' && (
           <>
-            {filteredPokemons.map(pokemon => (
-              <PokemonCard key={pokemon.name} pokemon_name={pokemon.name} addHandler isFullDescription={false} />
-            ))}
+            {filteredPokemons.length === 0 ? (
+              <p className="text-center text-gray-500">No se encontraron Pokémon.</p>
+            ) : (
+              filteredPokemons.map(pokemon => (
+                <PokemonCard key={pokemon.name} pokemon_name={pokemon.name} addHandler={true} isFullDescription={false} />
+              ))
+            )}
           </>
         )}
       </div>
