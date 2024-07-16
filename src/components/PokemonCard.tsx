@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch.ts";
-import {useAppSelector} from "../hooks/useAppSelector.ts";
+import { Link } from 'react-router-dom';
+
 import {addToCombatList, removeFromCombatList} from "../features/combat/combatSlice.ts";
 
 interface PokemonStats {
@@ -105,7 +106,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           </>
         )}
 
-        <div className="flex justify-content text-center">
+        <div className="grid grid-cols-1">
           {addHandler && (
             <button
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
@@ -123,6 +124,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
               Remove from team
             </button>
           )}
+
+          <Link to={`/pokemon/${pokemon.id}`}>
+            <button className="w-full mt-4 bg-green-500 text-white px-4 py-2 rounded">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>
