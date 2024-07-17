@@ -1,4 +1,4 @@
-import {IPokemon as Pokemon} from "./IPokemon.ts";
+import {Pokemon} from "./Pokemon.ts";
 
 export interface PokemonState {
   pokemons: Pokemon[];

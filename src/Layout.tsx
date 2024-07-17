@@ -1,4 +1,3 @@
-import React from "react";
 import PokemonList from "./components/PokemonList.tsx";
 import CombatList from "./components/CombatList.tsx";
 

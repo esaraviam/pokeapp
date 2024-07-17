@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Pokemon} from "../interfaces/IPokemon.ts";
+import {Pokemon} from "../interfaces/Pokemon.ts";
 const POKE_API_URL = 'https://pokeapi.co/api/v2';
 
 

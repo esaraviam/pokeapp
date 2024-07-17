@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchPokemons, fetchPokemonDetails } from '../../services/pokemonService';
-import {PokemonState} from '../../interfaces/IPokemonState.ts'
+import {PokemonState} from '../../interfaces/PokemonState.ts'
 
 const initialState: PokemonState = {
   pokemons: [],

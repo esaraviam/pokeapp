@@ -32,7 +32,7 @@ const PokemonDetail: React.FC = () => {
       <img className="h-48 w-full object-contain" src={selectedPokemon.image} alt={selectedPokemon.name} />
       <div className="p-4">
         <div className="flex items-center justify-center mb-2">
-          {selectedPokemon.types.map((type) => (
+          {selectedPokemon.types.map((type:string) => (
             <span key={type} className="bg-red-500 text-white px-2 py-1 rounded-full text-xs mx-1">
               {type}
             </span>
