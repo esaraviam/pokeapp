@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { getPokemons } from '../features/pokemon/pokemonSlice';
-import PokemonCard from './PokemonCard';
-import SearchBar from './SearchBar';
 
+import SearchBar from './SearchBar';
+import SmallCard from "./SmallCard.tsx";
 const PokemonList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { pokemons, status } = useAppSelector(state => state.pokemon);
@@ -34,7 +34,7 @@ const PokemonList: React.FC = () => {
         <h1 className="text-xl font-bold">Que pokemon buscas...</h1>
         <SearchBar onSearch={handleSearch} />
       </div>
-      <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3  sm:grid-cols-2 xs:grid-cols-1 gap-4">
         {status === 'loading' && <p>Loading...</p>}
         {status === 'succeeded' && (
           <>
@@ -42,12 +42,13 @@ const PokemonList: React.FC = () => {
               <p className="text-center text-gray-500">No se encontraron Pokémon.</p>
             ) : (
               filteredPokemons.map(pokemon => (
-                <PokemonCard key={pokemon.name} pokemonData={pokemon} pokemon_name={pokemon.name} addHandler={true} isFullDescription={false} />
+                <SmallCard key={pokemon.name} pokemonData={pokemon} pokemon_name={pokemon.name} />
               ))
             )}
           </>
         )}
       </div>
+
     </>
   );
 };

@@ -1,6 +1,5 @@
-import React from 'react';
 import {useAppSelector} from '../hooks/useAppSelector';
-import PokemonCard from './PokemonCard';
+import SmallCard from "./SmallCard.tsx";
 
 const CombatList: React.FC = () => {
   const combatList = useAppSelector(state => state.combat.combatList);
@@ -12,9 +11,8 @@ const CombatList: React.FC = () => {
       ) : (
         <div>
           {combatList.map(pokemon =>
-            <PokemonCard
+            <SmallCard
               pokemon_name={pokemon}
-              isFullDescription={false}
               deleteHandler
             />
           )}
