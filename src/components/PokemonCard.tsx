@@ -10,7 +10,7 @@ interface PokemonCardProps {
   addHandler?: boolean;
   deleteHandler?: boolean;
   isFullDescription: boolean;
-  pokemonData: Pokemon
+  pokemonData?: Pokemon
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
@@ -20,7 +20,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
                                                    isFullDescription = false,
                                                    pokemonData
                                                  }) => {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(pokemonData);
+  const [pokemon, setPokemon] = useState<Pokemon | null | undefined>(pokemonData);
 
   const dispatch = useAppDispatch();
 
