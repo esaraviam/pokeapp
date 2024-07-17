@@ -1,70 +1,39 @@
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch.ts";
-import { Link } from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
 import {addToCombatList, removeFromCombatList} from "../features/combat/combatSlice.ts";
-
-interface PokemonStats {
-  hp: number;
-  attack: number;
-  defense: number;
-  specialAttack: number;
-  specialDefense: number;
-  speed: number;
-}
-
-interface Pokemon {
-  id: number;
-  name: string;
-  weight: number;
-  height: number;
-  moves: string[];
-  types: string[];
-  stats: PokemonStats;
-  image: string;
-}
+import {Pokemon} from "../interfaces/Pokemon.ts";
+import {fetchPokemonDetails} from "../services/pokemonService.ts";
 
 interface PokemonCardProps {
   pokemon_name: string;
   addHandler?: boolean;
   deleteHandler?: boolean;
   isFullDescription: boolean;
+  pokemonData: Pokemon
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
                                                    pokemon_name,
                                                    addHandler,
                                                    deleteHandler,
-                                                   isFullDescription = false
+                                                   isFullDescription = false,
+                                                   pokemonData
                                                  }) => {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(pokemonData);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchPokemon = async () => {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon_name);
-      const data = await response.json();
-      const transformedPokemon: Pokemon = {
-        id: data.id,
-        name: data.name,
-        weight: data.weight,
-        height: data.height,
-        moves: data.moves.slice(0, 2).map((move: any) => move.move.name),
-        types: data.types.map((type: any) => type.type.name),
-        stats: {
-          hp: data.stats[0].base_stat,
-          attack: data.stats[1].base_stat,
-          defense: data.stats[2].base_stat,
-          specialAttack: data.stats[3].base_stat,
-          specialDefense: data.stats[4].base_stat,
-          speed: data.stats[5].base_stat,
-        },
-        image: data.sprites.other['official-artwork'].front_default,
-      };
+      const response = await fetchPokemonDetails(pokemon_name)
+      const transformedPokemon: Pokemon = response
       setPokemon(transformedPokemon);
     };
-    fetchPokemon();
+    if (!pokemonData) {
+      fetchPokemon();
+    }
+
   }, [pokemon_name]);
 
   if (!pokemon) {

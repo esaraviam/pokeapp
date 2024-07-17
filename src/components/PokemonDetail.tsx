@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {useAppDispatch} from "../hooks/useAppDispatch.ts";
 import {useAppSelector} from "../hooks/useAppSelector.ts";

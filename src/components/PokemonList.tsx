@@ -42,7 +42,7 @@ const PokemonList: React.FC = () => {
               <p className="text-center text-gray-500">No se encontraron Pokémon.</p>
             ) : (
               filteredPokemons.map(pokemon => (
-                <PokemonCard key={pokemon.name} pokemon_name={pokemon.name} addHandler={true} isFullDescription={false} />
+                <PokemonCard key={pokemon.name} pokemonData={pokemon} pokemon_name={pokemon.name} addHandler={true} isFullDescription={false} />
               ))
             )}
           </>

@@ -1,18 +1,22 @@
 import axios from 'axios';
 import {Pokemon} from "../interfaces/Pokemon.ts";
+
 const POKE_API_URL = 'https://pokeapi.co/api/v2';
 
 
 
-export const fetchPokemons = async () => {
+export const fetchPokemons = async (): Promise<Pokemon[]> => {
   const response = await axios.get(`${POKE_API_URL}/pokemon?limit=151`);
-  return response.data.results;
+  const promiseArray = response.data.results.map((pokemon: { name: string }) => {
+    return fetchPokemonDetails(pokemon.name);
+  });
+  const results = await Promise.all(promiseArray);
+  return results;
 };
-
 export const fetchPokemonDetails = async (pokemon_name: string): Promise<Pokemon> => {
   const response = await axios.get(`${POKE_API_URL}/pokemon/${pokemon_name}`);
   const data = response.data;
-  const transformedPokemon: Pokemon = {
+  return {
     id: data.id,
     name: data.name,
     weight: data.weight,
@@ -29,5 +33,4 @@ export const fetchPokemonDetails = async (pokemon_name: string): Promise<Pokemon
     },
     image: data.sprites.other['official-artwork'].front_default,
   };
-  return transformedPokemon;
 };
