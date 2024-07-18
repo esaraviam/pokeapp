@@ -119,7 +119,7 @@ const DetailCard: React.FC<PokemonCardProps> = ({
           </div>
           <div className="p-2 text-start">
             <ul>
-            {pokemon.moves.map(move => <li className="text-xs pt-1">{move}</li>)}
+            {pokemon.moves.map(move => <li key={move} className="text-xs pt-1">{move}</li>)}
             </ul>
             <p className="text-bold">Moves</p>
           </div>

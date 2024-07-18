@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPokemons, fetchPokemonDetails } from '../../services/pokemonService';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {fetchPokemonDetails, fetchPokemons} from '../../services/pokemonService';
 import {PokemonState} from '../../interfaces/PokemonState.ts'
+import {Pokemon} from '../../interfaces/Pokemon'
 
 const initialState: PokemonState = {
   pokemons: [],
@@ -8,10 +9,14 @@ const initialState: PokemonState = {
   status: 'idle',
 };
 
-export const getPokemons = createAsyncThunk('pokemon/getPokemons', async () => {
-  const response = await fetchPokemons();
-  return response;
-});
+
+export const getPokemons = createAsyncThunk<Pokemon[], void>(
+  'pokemon/getPokemons',
+  async () => {
+    const response = await fetchPokemons();
+    return response;
+  }
+);
 
 export const getPokemonDetails = createAsyncThunk('pokemon/getPokemonDetails', async (pokemon_name: string) => {
   const transformedPokemon = await fetchPokemonDetails(pokemon_name);
