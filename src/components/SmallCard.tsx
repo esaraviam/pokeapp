@@ -24,6 +24,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
 
   useEffect(() => {
     const fetchPokemon = async () => {
+      console.log(pokemon_name)
       setPokemon(await fetchPokemonDetails(pokemon_name));
     };
     if (!pokemonData) {
@@ -51,7 +52,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
                           rounded-full border-2
                           hover:scale-125
                           "
-                        onClick={() => dispatch(addToCombatList(pokemon.name))}
+                        onClick={() => dispatch(addToCombatList(pokemon))}
                 >+
                 </button>
               </div>
@@ -71,7 +72,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
 
         </div>
         <div className="mb-4">
-          <button className="w-full" onClick={() => dispatch(addToCombatList(pokemon.name))}>
+          <button className="w-full" onClick={() => dispatch(addToCombatList(pokemon))}>
             <img className="h-24 w-full object-contain drop-shadow-2xl" src={pokemon.image} alt={pokemon.name}/>
           </button>
 
@@ -90,7 +91,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
                           rounded-full border-2
                           hover:scale-125
                           "
-                                     onClick={() => dispatch(removeFromCombatList(pokemon.name))}
+                                     onClick={() => dispatch(removeFromCombatList(pokemon))}
           >🗑️
           </button>)}
         </div>

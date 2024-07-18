@@ -9,10 +9,12 @@ const CombatList: React.FC = () => {
       {combatList.length === 0 ? (
         <p className="text-center text-gray-500">Aun no haz agregado a ningun pokemon.</p>
       ) : (
-        <div>
+        <div className="grid grid-cols-2">
           {combatList.map(pokemon =>
             <SmallCard
-              pokemon_name={pokemon}
+              key={pokemon.name}
+              pokemon_name={pokemon.name}
+              pokemonData={pokemon}
               deleteHandler
             />
           )}
